@@ -7,6 +7,8 @@ import BoardPage from "@/pages/BoardPage";
 import PostDetailPage from "@/pages/PostDetailPage";
 import AdminPage from "@/pages/AdminPage";
 import SubmitPage from "@/pages/SubmitPage";
+import MissionPage from "@/pages/MissionPage";
+import ImpactPage from "@/pages/ImpactPage";
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
             <AppShell>
               <Routes>
                 <Route path="/" element={<BoardPage />} />
+                <Route path="/mission" element={<MissionPage />} />
+                <Route path="/impact" element={<ImpactPage />} />
                 <Route path="/submit" element={<SubmitPage />} />
                 <Route path="/post/:id" element={<PostDetailPage />} />
                 <Route path="/admin" element={<AdminPage />} />

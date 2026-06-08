@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { trackPostView } from "@/lib/impactTracker";
 import { CategoryBadge } from "@/components/CategoryBadge";
 import { CountdownBadge } from "@/components/CountdownBadge";
 import { BookmarkButton } from "@/components/BookmarkButton";
@@ -16,6 +18,10 @@ export default function PostDetailPage() {
   const { isVerified } = useVerifiedUsers();
   const post = id ? getPostById(id) : undefined;
   const imageUrl = useImage(post?.imageUrl);
+
+  useEffect(() => {
+    if (post) trackPostView();
+  }, [post?.id]);
 
   if (!post) {
     return (
@@ -48,7 +54,7 @@ export default function PostDetailPage() {
   const categoryColor = CATEGORY_CONFIG[post.category].hex;
 
   return (
-    <main className="mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6">
+    <main id="main-content" className="mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6">
       <Link
         to="/"
         className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white"

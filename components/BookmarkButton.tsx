@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useBookmarks } from "@/lib/hooks/useBookmarks";
+import { trackBookmarkSaved } from "@/lib/impactTracker";
 
 type BookmarkButtonProps = {
   postId: string;
@@ -22,6 +23,7 @@ export function BookmarkButton({
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    if (!saved) trackBookmarkSaved();
     toggleBookmark(postId);
     setAnimating(true);
     setTimeout(() => setAnimating(false), 300);

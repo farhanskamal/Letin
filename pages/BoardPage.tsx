@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { PostCard } from "@/components/PostCard";
 import { PostCardPoster } from "@/components/PostCardPoster";
@@ -8,7 +8,10 @@ import { MapView } from "@/components/MapView";
 import { FeaturedSection } from "@/components/FeaturedSection";
 import { LetinLogo } from "@/components/LetinLogo";
 import { Sparkle } from "@/components/Sparkle";
+import { BarrierCallout } from "@/components/BarrierCallout";
+import { GetInvolved } from "@/components/GetInvolved";
 import { usePosts } from "@/context/PostsContext";
+import { trackBoardVisit } from "@/lib/impactTracker";
 import { filterPosts, sortPosts } from "@/lib/utils";
 import type { FilterCategory } from "@/lib/types";
 
@@ -17,6 +20,10 @@ export default function BoardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<FilterCategory>("all");
   const [viewMode, setViewMode] = useState<"grid" | "map">("grid");
+
+  useEffect(() => {
+    trackBoardVisit();
+  }, []);
 
   const displayedPosts = useMemo(
     () => sortPosts(filterPosts(posts, { search: searchQuery, category: activeCategory })),
@@ -38,7 +45,7 @@ export default function BoardPage() {
   }, [posts]);
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+    <main id="main-content" className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Hero */}
       <section className="relative mb-12 overflow-hidden rounded-3xl bg-white/10 px-6 py-10 ring-1 ring-white/20 sm:px-10 sm:py-14">
         <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -63,7 +70,8 @@ export default function BoardPage() {
               Board.
             </h1>
             <p className="mt-4 max-w-lg text-base text-white/70 sm:text-lg">
-              Events, deadlines, and resources — curated for your community.
+              Breaking barriers to opportunity — a free board for students who were never in the
+              room when the flyer went up.
             </p>
           </div>
 
@@ -81,6 +89,8 @@ export default function BoardPage() {
         <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-letin-yellow/20 blur-3xl" />
         <div className="pointer-events-none absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-letin-blue/20 blur-3xl" />
       </section>
+
+      <BarrierCallout />
 
       {/* Filters */}
       <header className="mb-10">
@@ -176,6 +186,8 @@ export default function BoardPage() {
           )}
         </div>
       )}
+
+      <GetInvolved />
     </main>
   );
 }

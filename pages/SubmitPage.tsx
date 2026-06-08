@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AdminPostForm } from "@/components/AdminPostForm";
 import { usePosts } from "@/context/PostsContext";
+import { trackPostSubmitted } from "@/lib/impactTracker";
 import type { Post } from "@/lib/types";
 
 export default function SubmitPage() {
@@ -9,11 +10,12 @@ export default function SubmitPage() {
 
   const handleSubmit = (data: Omit<Post, "id" | "postedAt">) => {
     createPost({ ...data, pinned: false });
+    trackPostSubmitted();
     navigate("/");
   };
 
   return (
-    <main className="mx-auto max-w-2xl px-4 py-8 sm:px-6">
+    <main id="main-content" className="mx-auto max-w-2xl px-4 py-8 sm:px-6">
       <Link
         to="/"
         className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white"

@@ -76,7 +76,7 @@ export default function AdminPage() {
 
   if (!isAuthenticated) {
     return (
-      <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-4 py-16">
+      <main id="main-content" className="mx-auto flex min-h-screen max-w-md flex-col justify-center px-4 py-16">
         <div className="rounded-2xl bg-white p-8 shadow-card">
           <h1 className="font-display mb-2 text-2xl font-bold text-gray-900">
             Admin Login
@@ -140,7 +140,7 @@ export default function AdminPage() {
   }
 
   return (
-    <main className="mx-auto min-h-screen max-w-4xl px-4 py-8 sm:px-6">
+    <main id="main-content" className="mx-auto min-h-screen max-w-4xl px-4 py-8 sm:px-6">
       {/* Toast notifications */}
       <div className="fixed right-4 top-4 z-50 flex flex-col gap-2">
         {toasts.map((toast) => (
