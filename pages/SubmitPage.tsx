@@ -1,22 +1,22 @@
 import { Link, useNavigate } from "react-router-dom";
 import { AdminPostForm } from "@/components/AdminPostForm";
 import { usePosts } from "@/context/PostsContext";
+import type { Post } from "@/lib/types";
 
 export default function SubmitPage() {
   const { createPost } = usePosts();
   const navigate = useNavigate();
 
-  const handleSubmit = (data: any) => {
-    // Force pinned to false for public submissions
+  const handleSubmit = (data: Omit<Post, "id" | "postedAt">) => {
     createPost({ ...data, pinned: false });
     navigate("/");
   };
 
   return (
-    <main className="mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6">
+    <main className="mx-auto max-w-2xl px-4 py-8 sm:px-6">
       <Link
         to="/"
-        className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
+        className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white"
       >
         <svg
           className="h-4 w-4"
@@ -32,15 +32,15 @@ export default function SubmitPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="font-display text-3xl font-bold text-gray-900">
+        <h1 className="font-display text-3xl font-bold text-white">
           Submit an Opportunity
         </h1>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-white/70">
           Share an event, resource, or deadline with the community.
         </p>
       </div>
 
-      <div className="rounded-2xl bg-white p-6 shadow-card sm:p-8">
+      <div className="card-surface p-6 sm:p-8">
         <AdminPostForm onSubmit={handleSubmit} submitLabel="Submit Post" />
       </div>
     </main>

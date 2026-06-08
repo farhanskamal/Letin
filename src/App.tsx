@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { PostsProvider } from "@/context/PostsContext";
 import { BookmarksProvider } from "@/context/BookmarksContext";
 import { VerifiedUsersProvider } from "@/context/VerifiedUsersContext";
+import { AppShell } from "@/components/AppShell";
 import BoardPage from "@/pages/BoardPage";
 import PostDetailPage from "@/pages/PostDetailPage";
 import AdminPage from "@/pages/AdminPage";
@@ -13,12 +14,14 @@ export default function App() {
       <PostsProvider>
         <BookmarksProvider>
           <BrowserRouter basename={import.meta.env.BASE_URL}>
-            <Routes>
-              <Route path="/" element={<BoardPage />} />
-              <Route path="/submit" element={<SubmitPage />} />
-              <Route path="/post/:id" element={<PostDetailPage />} />
-              <Route path="/admin" element={<AdminPage />} />
-            </Routes>
+            <AppShell>
+              <Routes>
+                <Route path="/" element={<BoardPage />} />
+                <Route path="/submit" element={<SubmitPage />} />
+                <Route path="/post/:id" element={<PostDetailPage />} />
+                <Route path="/admin" element={<AdminPage />} />
+              </Routes>
+            </AppShell>
           </BrowserRouter>
         </BookmarksProvider>
       </PostsProvider>

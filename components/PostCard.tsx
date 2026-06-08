@@ -15,10 +15,7 @@ type PostCardProps = {
   index?: number;
 };
 
-const ROTATIONS = ["-rotate-1", "rotate-[1.5deg]", "rotate-1", "-rotate-[1.5deg]"];
-
 export function PostCard({ post, index = 0 }: PostCardProps) {
-  const rotation = ROTATIONS[index % ROTATIONS.length];
   const categoryColor = CATEGORY_CONFIG[post.category].hex;
   const staggerClass = `stagger-${Math.min(index + 1, 8)}`;
   const imageUrl = useImage(post.imageUrl);
@@ -27,11 +24,11 @@ export function PostCard({ post, index = 0 }: PostCardProps) {
   return (
     <Link
       to={`/post/${post.id}`}
-      className={`group relative mb-4 block break-inside-avoid animate-fade-in-up ${staggerClass} ${rotation} transition-transform duration-200 hover:-translate-y-1 hover:rotate-0`}
+      className={`group relative mb-4 block break-inside-avoid animate-fade-in-up ${staggerClass} transition-transform duration-200 hover:-translate-y-1`}
     >
       <article
-        className={`relative overflow-hidden rounded-2xl bg-white p-5 shadow-card transition-shadow group-hover:shadow-card-hover ${
-          post.pinned ? "ring-2 ring-amber-300/60" : ""
+        className={`card-surface relative overflow-hidden p-5 ${
+          post.pinned ? "ring-2 ring-letin-yellow/80" : ""
         }`}
       >
         {/* Category accent bar */}
@@ -57,11 +54,11 @@ export function PostCard({ post, index = 0 }: PostCardProps) {
           <BookmarkButton postId={post.id} />
         </div>
 
-        <h2 className="font-display mb-2 pl-2 text-lg font-bold leading-tight text-gray-900 group-hover:text-gray-700">
+        <h2 className="font-display mb-2 pl-2 text-lg font-bold leading-tight text-letin-ink group-hover:text-letin-purple-deep">
           {post.title}
         </h2>
 
-        <p className="mb-3 line-clamp-3 pl-2 text-sm leading-relaxed text-gray-600">
+        <p className="mb-3 line-clamp-3 pl-2 text-sm leading-relaxed text-letin-purple-dark">
           {stripHtml(post.description)}
         </p>
 
@@ -69,7 +66,7 @@ export function PostCard({ post, index = 0 }: PostCardProps) {
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-md bg-board-paper px-2 py-0.5 text-xs text-gray-600"
+              className="rounded-md bg-letin-muted px-2 py-0.5 text-xs text-letin-purple-dark"
             >
               #{tag}
             </span>
@@ -78,7 +75,7 @@ export function PostCard({ post, index = 0 }: PostCardProps) {
 
         <div className="flex items-center justify-between gap-2 pl-2">
           <CountdownBadge deadline={post.deadline} />
-          <div className="flex items-center gap-1 text-xs text-gray-400">
+          <div className="flex items-center gap-1 text-xs text-letin-purple-dark/60">
             <span>by {post.postedBy}</span>
             {isVerified(post.postedBy) && <VerifiedBadge />}
           </div>

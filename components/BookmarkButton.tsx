@@ -1,23 +1,23 @@
 import { useState } from "react";
-import { useBookmarks } from "@/context/BookmarksContext";
+import { useBookmarks } from "@/lib/hooks/useBookmarks";
 
 type BookmarkButtonProps = {
   postId: string;
   size?: "sm" | "md";
-  theme?: "light" | "dark";
+  variant?: "light" | "dark";
 };
 
-export function BookmarkButton({ postId, size = "sm", theme = "light" }: BookmarkButtonProps) {
+export function BookmarkButton({
+  postId,
+  size = "sm",
+  variant = "light",
+}: BookmarkButtonProps) {
   const { isBookmarked, toggleBookmark } = useBookmarks();
   const [animating, setAnimating] = useState(false);
   const saved = isBookmarked(postId);
 
   const iconSize = size === "sm" ? "h-5 w-5" : "h-6 w-6";
   const buttonSize = size === "sm" ? "p-1.5" : "p-2";
-  const hoverClass = theme === "dark" ? "hover:bg-white/10" : "hover:bg-black/5";
-  const iconColor = saved 
-    ? "fill-amber-500 text-amber-500" 
-    : theme === "dark" ? "fill-none text-white/80" : "fill-none text-gray-400";
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -33,12 +33,18 @@ export function BookmarkButton({ postId, size = "sm", theme = "light" }: Bookmar
       onClick={handleClick}
       aria-label={saved ? "Remove bookmark" : "Save post"}
       aria-pressed={saved}
-      className={`rounded-full ${buttonSize} transition-colors ${hoverClass} ${
-        animating ? "animate-bookmark-pop" : ""
-      }`}
+      className={`rounded-full ${buttonSize} transition-colors ${
+        variant === "dark" ? "hover:bg-white/20" : "hover:bg-letin-muted"
+      } ${animating ? "animate-bookmark-pop" : ""}`}
     >
       <svg
-        className={`${iconSize} transition-colors ${iconColor}`}
+        className={`${iconSize} transition-colors ${
+          saved
+            ? "fill-letin-yellow text-letin-yellow"
+            : variant === "dark"
+              ? "fill-none text-white/70"
+              : "fill-none text-letin-purple-dark/40"
+        }`}
         viewBox="0 0 24 24"
         stroke="currentColor"
         strokeWidth="2"

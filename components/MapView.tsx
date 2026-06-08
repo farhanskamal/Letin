@@ -32,7 +32,7 @@ export function MapView({ posts }: MapViewProps) {
     mappedPosts.length > 0 ? mappedPosts[0].coordinates! : [39.8283, -98.5795];
 
   return (
-    <div className="h-[600px] w-full overflow-hidden rounded-2xl border border-gray-200 shadow-card animate-fade-in-up relative z-0">
+    <div className="relative z-0 h-[600px] w-full animate-fade-in-up overflow-hidden rounded-2xl shadow-card ring-2 ring-white/30">
       <MapContainer
         center={center}
         zoom={mappedPosts.length > 0 ? 12 : 4}

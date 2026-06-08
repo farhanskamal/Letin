@@ -20,9 +20,9 @@ export default function PostDetailPage() {
   if (!post) {
     return (
       <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-4 py-16 text-center">
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-board-paper">
+        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-white/10">
           <svg
-            className="h-10 w-10 text-gray-400"
+            className="h-10 w-10 text-white/50"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -32,16 +32,13 @@ export default function PostDetailPage() {
             <path d="M9 12h6m-3-3v6m-7 4h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
           </svg>
         </div>
-        <h1 className="font-display text-3xl font-bold text-gray-900">
+        <h1 className="font-display text-3xl font-bold text-white">
           Post not found
         </h1>
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-white/70">
           This flyer may have been removed from the board.
         </p>
-        <Link
-          to="/"
-          className="mt-6 rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
-        >
+        <Link to="/" className="btn-primary mt-6">
           Back to Board
         </Link>
       </main>
@@ -54,7 +51,7 @@ export default function PostDetailPage() {
     <main className="mx-auto min-h-screen max-w-2xl px-4 py-8 sm:px-6">
       <Link
         to="/"
-        className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-gray-500 transition-colors hover:text-gray-900"
+        className="mb-8 inline-flex items-center gap-1.5 text-sm font-medium text-white/70 transition-colors hover:text-white"
       >
         <svg
           className="h-4 w-4"
@@ -69,7 +66,7 @@ export default function PostDetailPage() {
         Back to Board
       </Link>
 
-      <article className="animate-fade-in-up overflow-hidden rounded-2xl bg-white shadow-card">
+      <article className="card-surface animate-fade-in-up overflow-hidden">
         {/* Category accent bar at top */}
         <div
           className="h-1.5 w-full"
@@ -92,12 +89,12 @@ export default function PostDetailPage() {
             </div>
           </div>
 
-          <h1 className="font-display mb-6 text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">
+          <h1 className="font-display mb-6 text-3xl font-bold leading-tight text-letin-ink sm:text-4xl">
             {post.title}
           </h1>
 
           <div
-            className="prose prose-gray max-w-none mb-8 text-base leading-relaxed text-gray-700"
+            className="prose prose-letin max-w-none mb-8 text-base leading-relaxed text-letin-purple-dark"
             dangerouslySetInnerHTML={{ __html: sanitizeHtml(post.description) }}
           />
 
@@ -106,7 +103,7 @@ export default function PostDetailPage() {
               {post.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-md bg-board-paper px-2.5 py-1 text-sm text-gray-600"
+                  className="rounded-md bg-letin-muted px-2.5 py-1 text-sm text-letin-purple-dark"
                 >
                   #{tag}
                 </span>
@@ -114,7 +111,7 @@ export default function PostDetailPage() {
             </div>
           )}
 
-          <div className="mb-8 flex flex-wrap gap-4 text-sm text-gray-500">
+          <div className="mb-8 flex flex-wrap gap-4 text-sm text-letin-purple-dark">
             <span className="flex items-center gap-1">
               Posted by {post.postedBy}
               {isVerified(post.postedBy) && <VerifiedBadge />}
@@ -128,7 +125,7 @@ export default function PostDetailPage() {
               href={post.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-xl bg-gray-900 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-gray-800"
+              className="btn-primary inline-flex items-center gap-2"
             >
               Apply / Learn More
               <svg

@@ -115,7 +115,7 @@ export default function AdminPage() {
             )}
             <button
               type="submit"
-              className="w-full rounded-lg bg-gray-900 py-2.5 text-sm font-medium text-white hover:bg-gray-800"
+              className="btn-primary w-full"
             >
               Sign In
             </button>
@@ -148,7 +148,7 @@ export default function AdminPage() {
             key={toast.id}
             className={`animate-fade-in-up rounded-lg px-4 py-3 text-sm font-medium shadow-lg ${
               toast.type === "success"
-                ? "bg-gray-900 text-white"
+                ? "bg-letin-yellow text-letin-ink"
                 : "bg-red-500 text-white"
             }`}
           >
@@ -159,17 +159,17 @@ export default function AdminPage() {
 
       <header className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="font-display text-3xl font-bold text-gray-900">
+          <h1 className="font-display text-3xl font-bold text-white">
             Admin Dashboard
           </h1>
-          <p className="mt-1 text-sm text-gray-500">
+          <p className="mt-1 text-sm text-white/60">
             Create, edit, and pin posts for the community board.
           </p>
         </div>
         <div className="flex gap-3">
           <Link
             to="/"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 ring-1 ring-gray-200 hover:bg-white"
+            className="btn-secondary"
           >
             View Board
           </Link>
@@ -180,7 +180,7 @@ export default function AdminPage() {
               setUsername("");
               setPassword("");
             }}
-            className="rounded-lg px-4 py-2 text-sm font-medium text-gray-600 ring-1 ring-gray-200 hover:bg-white"
+            className="btn-secondary"
           >
             Logout
           </button>
@@ -188,7 +188,7 @@ export default function AdminPage() {
       </header>
 
       <section className="mb-10 rounded-2xl bg-white p-6 shadow-card">
-        <h2 className="font-display mb-4 text-xl font-bold text-gray-900">
+        <h2 className="font-display mb-4 text-xl font-bold text-letin-ink">
           {editingPost ? "Edit Post" : "Create Post"}
         </h2>
         <AdminPostForm
@@ -201,7 +201,7 @@ export default function AdminPage() {
       </section>
 
       <section className="mb-10 rounded-2xl bg-white p-6 shadow-card">
-        <h2 className="font-display mb-4 text-xl font-bold text-gray-900">
+        <h2 className="font-display mb-4 text-xl font-bold text-letin-ink">
           Verified Users
         </h2>
         <div className="mb-4 flex gap-2">
@@ -221,7 +221,7 @@ export default function AdminPage() {
                 showToast("User verified.");
               }
             }}
-            className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+            className="btn-primary"
           >
             Add
           </button>
@@ -248,7 +248,7 @@ export default function AdminPage() {
       </section>
 
       <section>
-        <h2 className="font-display mb-4 text-xl font-bold text-gray-900">
+        <h2 className="font-display mb-4 text-xl font-bold text-letin-ink">
           All Posts ({posts.length})
         </h2>
 

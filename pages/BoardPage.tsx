@@ -6,6 +6,8 @@ import { SearchBar } from "@/components/SearchBar";
 import { CategoryFilter } from "@/components/CategoryFilter";
 import { MapView } from "@/components/MapView";
 import { FeaturedSection } from "@/components/FeaturedSection";
+import { LetinLogo } from "@/components/LetinLogo";
+import { Sparkle } from "@/components/Sparkle";
 import { usePosts } from "@/context/PostsContext";
 import { filterPosts, sortPosts } from "@/lib/utils";
 import type { FilterCategory } from "@/lib/types";
@@ -36,60 +38,75 @@ export default function BoardPage() {
   }, [posts]);
 
   return (
-    <main className="mx-auto min-h-screen max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-      <header className="mb-10">
-        <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Hero */}
+      <section className="relative mb-12 overflow-hidden rounded-3xl bg-white/10 px-6 py-10 ring-1 ring-white/20 sm:px-10 sm:py-14">
+        <div className="relative z-10 flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div>
-            <h1 className="font-display text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
-              Community Board
+            <LetinLogo size="lg" className="mb-6" />
+            <h1 className="font-body text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+              Your Local{" "}
+              <span className="relative inline-block">
+                <span className="text-gradient-opportunities">Opportunities</span>
+                <Sparkle
+                  color="yellow"
+                  size={14}
+                  className="absolute -right-5 -top-2 animate-sparkle"
+                />
+                <Sparkle
+                  color="blue"
+                  size={10}
+                  className="absolute -bottom-1 -left-4 animate-sparkle"
+                  style={{ animationDelay: "0.5s" }}
+                />
+              </span>{" "}
+              Board.
             </h1>
-            <p className="mt-2 max-w-lg text-gray-600">
-              Opportunities, events, and resources — pinned up for you by mentors
-              and staff.
+            <p className="mt-4 max-w-lg text-base text-white/70 sm:text-lg">
+              Events, deadlines, and resources — curated for your community.
             </p>
           </div>
-          <div className="flex items-center gap-3 self-start sm:self-auto">
-            <span className="rounded-full bg-gray-900 px-3 py-1 text-xs font-semibold tabular-nums text-white">
+
+          <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center lg:flex-col lg:items-end">
+            <span className="rounded-full bg-letin-yellow px-4 py-1.5 text-sm font-bold tabular-nums text-letin-ink shadow-letin">
               {posts.length} {posts.length === 1 ? "post" : "posts"}
             </span>
-            <Link
-              to="/submit"
-              className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-800"
-            >
-              Submit Post
-            </Link>
-            <Link
-              to="/admin"
-              className="rounded-lg px-4 py-2 text-sm font-medium text-gray-500 ring-1 ring-gray-200 transition-colors hover:bg-white hover:text-gray-900"
-            >
-              Admin
+            <Link to="/submit" className="btn-primary">
+              Submit a Post
             </Link>
           </div>
         </div>
 
+        {/* Decorative blobs */}
+        <div className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-letin-yellow/20 blur-3xl" />
+        <div className="pointer-events-none absolute -bottom-12 -left-12 h-40 w-40 rounded-full bg-letin-blue/20 blur-3xl" />
+      </section>
+
+      {/* Filters */}
+      <header className="mb-10">
         <div className="space-y-4">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex-1 space-y-4">
               <SearchBar value={searchQuery} onChange={setSearchQuery} />
               <CategoryFilter active={activeCategory} onChange={setActiveCategory} />
             </div>
-            <div className="flex rounded-lg bg-gray-100 p-1">
+            <div className="flex rounded-xl bg-white/15 p-1 ring-1 ring-white/20">
               <button
                 onClick={() => setViewMode("grid")}
-                className={`flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   viewMode === "grid"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-500 hover:text-gray-900"
+                    ? "bg-letin-yellow text-letin-ink shadow-letin"
+                    : "text-white/70 hover:text-white"
                 }`}
               >
                 Grid
               </button>
               <button
                 onClick={() => setViewMode("map")}
-                className={`flex items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
                   viewMode === "map"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-500 hover:text-gray-900"
+                    ? "bg-letin-yellow text-letin-ink shadow-letin"
+                    : "text-white/70 hover:text-white"
                 }`}
               >
                 Map
@@ -110,11 +127,10 @@ export default function BoardPage() {
                 <line x1="16" y1="2" x2="16" y2="6" />
                 <line x1="8" y1="2" x2="8" y2="6" />
                 <line x1="3" y1="10" x2="21" y2="10" />
-                <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01M16 18h.01" />
               </svg>
             }
           />
-          
+
           <FeaturedSection
             title="Upcoming Deadlines"
             posts={upcomingDeadlines}
@@ -131,10 +147,10 @@ export default function BoardPage() {
       {viewMode === "map" ? (
         <MapView posts={displayedPosts} />
       ) : displayedPosts.length === 0 ? (
-        <div className="animate-fade-in-up rounded-2xl bg-white p-12 text-center shadow-card">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-board-paper">
+        <div className="card-surface animate-fade-in-up p-12 text-center">
+          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-letin-muted">
             <svg
-              className="h-8 w-8 text-gray-400"
+              className="h-8 w-8 text-letin-purple-dark"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -144,22 +160,20 @@ export default function BoardPage() {
               <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
           </div>
-          <p className="font-display text-xl font-bold text-gray-700">
-            No posts found
-          </p>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="font-display text-xl font-bold text-letin-ink">No posts found</p>
+          <p className="mt-2 text-sm text-letin-purple-dark">
             Try adjusting your search or category filter.
           </p>
         </div>
       ) : (
         <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-          {displayedPosts.map((post, index) => (
+          {displayedPosts.map((post, index) =>
             post.imageType === "poster" ? (
               <PostCardPoster key={post.id} post={post} index={index} />
             ) : (
               <PostCard key={post.id} post={post} index={index} />
-            )
-          ))}
+            ),
+          )}
         </div>
       )}
     </main>

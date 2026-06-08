@@ -165,7 +165,7 @@ export function AdminPostForm({
     `w-full rounded-lg border px-3 py-2 text-sm transition-colors focus:outline-none focus:ring-2 ${
       errors[field]
         ? "border-red-400 bg-red-50 focus:ring-red-200"
-        : "border-gray-200 bg-white focus:ring-gray-200"
+        : "border-letin-muted bg-white focus:ring-letin-yellow"
     }`;
 
   return (
@@ -380,7 +380,7 @@ export function AdminPostForm({
         <button
           type="submit"
           disabled={isUploading}
-          className="rounded-lg bg-gray-900 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-gray-800 disabled:opacity-50"
+          className="btn-primary disabled:opacity-50 disabled:hover:translate-y-0"
         >
           {isUploading ? "Saving..." : submitLabel}
         </button>
@@ -388,7 +388,7 @@ export function AdminPostForm({
           <button
             type="button"
             onClick={onCancel}
-            className="rounded-lg px-5 py-2.5 text-sm font-medium text-gray-600 ring-1 ring-gray-200 transition-colors hover:bg-board-paper"
+            className="btn-secondary !text-letin-ink !ring-letin-muted"
           >
             Cancel
           </button>

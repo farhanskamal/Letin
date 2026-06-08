@@ -5,7 +5,7 @@ type VerifiedBadgeProps = {
 export function VerifiedBadge({ className = "" }: VerifiedBadgeProps) {
   return (
     <div
-      className={`inline-flex items-center justify-center text-blue-500 ${className}`}
+      className={`inline-flex items-center justify-center text-letin-blue ${className}`}
       title="Verified User"
     >
       <svg
